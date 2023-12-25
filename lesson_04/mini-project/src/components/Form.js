@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 
 export default class Form extends Component {
+    
     render() {
+        let {renderActionName} = this.props;
         return (
             <div className="card-body">
                 <h3 className="card-title">Thông tin sinh viên</h3>
@@ -57,7 +59,7 @@ export default class Form extends Component {
                         </div>
                     </div>
                     <button type="submit" className="btn btn-primary me-2">
-                        Submit
+                        {renderActionName}
                     </button>
                 </form>
             </div>

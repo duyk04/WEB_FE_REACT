@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 
-export default class Studen extends Component {
+export default class Student extends Component {
     render() {
+        let {renderStudent, stt} = this.props
         return (
             <>
                 <tr>
-                    <td>{rederStudent.stt}</td>
-                    <td>SV001</td>
-                    <td>Nguyễn Văn A</td>
-                    <td>20</td>
-                    <td>Nam</td>
+                    <td>{stt}</td>
+                    <td>{renderStudent.studentId}</td>
+                    <td>{renderStudent.studentName}</td>
+                    <td>{renderStudent.age}</td>
+                    <td>{renderStudent.sex === true ? 'Nam':'Nữ'}</td>
                     <td>
                         <div className="template-demo">
                             <button

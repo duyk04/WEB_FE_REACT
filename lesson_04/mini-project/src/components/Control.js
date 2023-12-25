@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 
 export default class Control extends Component {
+    handleAddNew = () => {
+        this.props.onAdd(true, "Add New");
+    }
     render() {
         return (
             <div className="card-header">
                 <div className="row">
                     <div className="col-3 ">
-                        <button type="button" className="btn btn-primary btn-icon-text">
+                        <button type="button" className="btn btn-primary btn-icon-text"
+                            onClick={this.handleAddNew}>
                             Thêm mới sinh viên
                         </button>
                     </div>

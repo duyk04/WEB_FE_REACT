@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import Studen from './Studen'
+import Student from './Student'
 
 export default class ListStudent extends Component {
     render() {
         let {renderStudents} = this.props;
 
         let elementStudent = renderStudents.map((item, index) => {
-            return <Studen key={item.studentId} renderStudent={item} stt={index+1}/>
+            return <Student key={item.studentId} renderStudent={item} stt={index+1}/>
         })
         return (
             <div className="card-body">
