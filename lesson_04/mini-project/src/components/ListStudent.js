@@ -2,11 +2,19 @@ import React, { Component } from 'react'
 import Student from './Student'
 
 export default class ListStudent extends Component {
+    handleViewOrEdit = (toggle, actionName, student) => {
+        this.props.onViewOrEdit(toggle, actionName, student)
+    }
+    handleDelete = (student) =>{
+        this.props.onDelete(student)
+    }
     render() {
-        let {renderStudents} = this.props;
+        let { renderStudents } = this.props;
 
         let elementStudent = renderStudents.map((item, index) => {
-            return <Student key={item.studentId} renderStudent={item} stt={index+1}/>
+            return <Student key={item.studentId} renderStudent={item} stt={index + 1}
+                onViewOrEdit={this.handleViewOrEdit}
+                onDelete={this.handleDelete} />
         })
         return (
             <div className="card-body">

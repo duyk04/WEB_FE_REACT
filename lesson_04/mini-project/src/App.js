@@ -16,22 +16,77 @@ export default class App extends Component {
 			],
 			isToggle: false,
 			actionName: " ",
+			student: {} // obj student
 		}
 	}
-	handleAddOrEditView = (toggle, actionName) => {
+	handleAddOrEditView = (toggle, actionName, student) => {
 		this.setState({
 			isToggle: toggle,
-			actionName: actionName
+			actionName: actionName,
+			student: student
 		})
 	}
+	//hàm xử lý sự kiện submit form
+	handleSubmit = (toggle, actionName, student) => {
+		console.log(toggle, actionName, student);
+		// this.setState({
+		// 	isToggle: toggle,
+
+		// })
+		let { students } = this.state;
+		//Khi thêm mới 
+		if (actionName === "Add New") {
+			// let { students } = this.state;
+			students.push(student);
+			// this.setState({
+			// 	students: students
+			// })
+		}
+		// khi sửa
+		if (actionName === "Update") {
+			//let { students } = this.state;
+			for (let i = 0; i < students.length; i++) {
+				if (students[i].studentId === student.studentId){
+					students[i] = student;
+				break}
+			}
+			// this.setState({
+			// 	students:students
+			// })
+		}
+		
+
+	}
+	handleDelete = (student) => {
+		// alert("Đồng ý xóa !", student.studentId)
+		// console.log(student);
+		let { students } = this.state;
+
+		let list = students.filter(x=>x.studentId !== student.studentId)
+		this.setState({
+			students:list
+		})
+
+	}
+
+	
 	render() {
-		let elementForm = this.state.isToggle === true ? <Form renderActionName={this.state.actionName}/> : "";
+		let elementForm = this.state.isToggle === true ?
+			<Form renderActionName={this.state.actionName}
+				renderStudent={this.state.student}
+				onSubmit={this.handleSubmit} /> : "";
+
+				//xử lý dữ liệu tìm kiếm
+	let {keyword, students} =  this.state;
+	let dataFilter
 		return (
 			<div className="row">
 				<div className="col-lg-7 grid-margin stretch-card">
 					<div className="card">
 						<Control onAdd={this.handleAddOrEditView} />
-						<ListStudent renderStudents={this.state.students} />
+						<ListStudent renderStudents={this.state.students}
+							onViewOrEdit={this.handleAddOrEditView}
+							onDelete={this.handleDelete} />
 					</div>
 				</div>
 				<div className="col-5 grid-margin">

@@ -1,8 +1,18 @@
 import React, { Component } from 'react'
 
 export default class Control extends Component {
+    constructor(props) {
+        super(props);
+        this.state={
+            keyword: ""
+        }
+    }
     handleAddNew = () => {
         this.props.onAdd(true, "Add New");
+    }
+    handleSearch = (e) => {
+        e.preventDefault();
+        this.props.onSearch(this.state.keyword)
     }
     render() {
         return (
@@ -22,8 +32,12 @@ export default class Control extends Component {
                                 className="form-control"
                                 placeholder="Search Here"
                                 title="Search here"
+                                name="keyword"
+                                value={this.state.keyword}
+                                onChange={(e) => this.setState({ keyword: e.target.value })}
                             />
-                            <button className="btn btn-primary btn-icon-text">
+                            <button className="btn btn-primary btn-icon-text"
+                                onClick={this.handleSearch}>
                                 Tìm kiếm
                             </button>
                         </form>
