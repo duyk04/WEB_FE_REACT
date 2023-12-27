@@ -16,7 +16,8 @@ export default class App extends Component {
 			],
 			isToggle: false,
 			actionName: " ",
-			student: {} // obj student
+			student: {}, // obj student
+			keyword: " "
 		}
 	}
 	handleAddOrEditView = (toggle, actionName, student) => {
@@ -35,26 +36,38 @@ export default class App extends Component {
 		// })
 		let { students } = this.state;
 		//Khi thêm mới 
+		if (actionName === "Close") {
+			this.setState({
+				isToggle: false
+			})
+		}
 		if (actionName === "Add New") {
 			// let { students } = this.state;
 			students.push(student);
 			// this.setState({
 			// 	students: students
 			// })
+			this.setState({
+				isToggle: false
+			})
 		}
 		// khi sửa
 		if (actionName === "Update") {
 			//let { students } = this.state;
 			for (let i = 0; i < students.length; i++) {
-				if (students[i].studentId === student.studentId){
+				if (students[i].studentId === student.studentId) {
 					students[i] = student;
-				break}
+					break
+				}
 			}
 			// this.setState({
 			// 	students:students
 			// })
+			this.setState({
+				isToggle: false
+			})
 		}
-		
+
 
 	}
 	handleDelete = (student) => {
@@ -62,29 +75,40 @@ export default class App extends Component {
 		// console.log(student);
 		let { students } = this.state;
 
-		let list = students.filter(x=>x.studentId !== student.studentId)
+		let list = students.filter(x => x.studentId !== student.studentId)
 		this.setState({
-			students:list
+			students: list
 		})
 
 	}
 
-	
+	handleSearch = (keyword) => {
+		this.setState({
+			keyword: keyword
+		})
+	}
 	render() {
 		let elementForm = this.state.isToggle === true ?
 			<Form renderActionName={this.state.actionName}
 				renderStudent={this.state.student}
 				onSubmit={this.handleSubmit} /> : "";
 
-				//xử lý dữ liệu tìm kiếm
-	let {keyword, students} =  this.state;
-	let dataFilter
+		//xử lý dữ liệu tìm kiếm
+		let { keyword, students } = this.state;
+		let dataFilter = students;
+		if (keyword !== "") {
+			dataFilter = students.filter(x => x.studentName.toLowerCase().includes(keyword.toLowerCase()))
+		}
+
 		return (
 			<div className="row">
 				<div className="col-lg-7 grid-margin stretch-card">
 					<div className="card">
-						<Control onAdd={this.handleAddOrEditView} />
-						<ListStudent renderStudents={this.state.students}
+						<Control onAdd={this.handleAddOrEditView}
+							onSearch={this.handleSearch} />
+						<ListStudent
+							// renderStudents={this.state.students}
+							renderStudents= {dataFilter}
 							onViewOrEdit={this.handleAddOrEditView}
 							onDelete={this.handleDelete} />
 					</div>
