@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Student from './Student'
 
-function ListStudents() {
+function ListStudents(props) {
+    const [listStudents, setListStudents] =  useState(props)
+    console.log(listStudents[1].studentId);
+
     return (
         <div className="card-body">
             <h3 className="card-title">Danh sách sinh viên</h3>
@@ -18,6 +21,7 @@ function ListStudents() {
                         </tr>
                     </thead>
                     <tbody>
+
                         <Student/>
                         <Student/>
                         <Student/>
