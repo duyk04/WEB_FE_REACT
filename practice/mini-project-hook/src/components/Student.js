@@ -1,10 +1,12 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import { Students } from './ListStudents'
 
 function Student() {
+    const student = useContext(Students)
     return (
         <tr>
             <td>1</td>
-            <td>SV001</td>
+            <td>{student[1].studentId}</td>
             <td>Nguyễn Văn A</td>
             <td>20</td>
             <td>Nam</td>

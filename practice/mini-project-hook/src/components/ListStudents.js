@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, createContext } from 'react'
 import Student from './Student'
+import { StudentsContext } from '../App';
 
-function ListStudents(props) {
-    const [listStudents, setListStudents] =  useState(props)
-    console.log(listStudents[1].studentId);
-
+export const Students = createContext()
+function ListStudents() {
+    const students = useContext(StudentsContext)
+    let student = students.map((item, index) => {
+        return <Student key={item.studentId} renderStudent={item} stt={index + 1}
+            />
+    })
     return (
         <div className="card-body">
             <h3 className="card-title">Danh sách sinh viên</h3>
@@ -21,10 +25,9 @@ function ListStudents(props) {
                         </tr>
                     </thead>
                     <tbody>
-
-                        <Student/>
-                        <Student/>
-                        <Student/>
+                        <Students.Provider value={student}>
+                            <Student/>
+                        </Students.Provider>
                     </tbody>
                 </table>
             </div>

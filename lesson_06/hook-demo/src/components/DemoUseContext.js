@@ -4,7 +4,7 @@ import Context from './Context';
 export const ThemeContext = createContext();
 
 export default function DemoUseContext() {
-    const arrTheme = ["green", "red", "blue", "white", "black"]
+    // const arrTheme = ["green", "red", "blue", "white", "black"]
     const [theme, setTheme] = useState("black")
     const toggleTheme = () => {
         setTheme(theme === "black" ? "red" : "black")
