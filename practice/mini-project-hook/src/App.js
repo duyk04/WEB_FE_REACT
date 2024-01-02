@@ -5,6 +5,7 @@ import FormStudent from './components/FormStudent';
 
 
 export const StudentsContext = createContext();
+export const Toggle = createContext()
 function App() {
 	const [students, setStudents] = useState([
 		{ studentId: "SV001", studentName: "Nguyễn Văn A", age: 20, sex: true, birthDate: "2002-04-23", birthPlace: "HN", address: "25, Vũ Ngọc Phan" },
@@ -18,15 +19,20 @@ function App() {
 	const [student, setStudent] = useState({});
 	const [keyword, setKeyword] = useState("");
 
+	console.log(isToggle);
+	// const renderForm = (isToggle) => {
+	// 	let isToggle === true ? <FormStudent/> : ""
+	// }
 	return (
 		<StudentsContext.Provider value={students}>
 			<div className="row">
 				<div className="col-lg-7 grid-margin stretch-card">
 					<div className="card">
-						<p>ddd{students[1].studentId}</p>
+						<Toggle.Provider value={isToggle}>
+							<Control />
+							<ListStudents />
+						</Toggle.Provider>
 
-						<Control />
-						<ListStudents/>
 					</div>
 				</div>
 				<div className="col-5 grid-margin">

@@ -1,13 +1,44 @@
 import React, { useState, useContext, createContext } from 'react'
 import Student from './Student'
 import { StudentsContext } from '../App';
+import { Toggle } from '../App';
 
 export const Students = createContext()
 function ListStudents() {
     const students = useContext(StudentsContext)
-    let student = students.map((item, index) => {
-        return <Student key={item.studentId} renderStudent={item} stt={index + 1}
-            />
+    const student = students.map((item, index) => {
+        return (
+            <tr key={index}>
+                <td>{index+1}</td>
+                <td>{item.studentId}</td>
+                <td>{item.studentName}</td>
+                <td>{item.age}</td>
+                <td>{item.sex === true ? 'Nam' : 'Nữ'}</td>
+                <td>
+                    <div className="template-demo">
+                        <button
+                            type="button"
+                            className="btn btn-danger btn-icon-text"
+                        >
+                            Xem
+                        </button>
+                        <button
+                            type="button"
+                            className="btn btn-warning btn-icon-text"
+                        >
+                            Sửa
+                        </button>
+                        <button
+                            type="button"
+                            className="btn btn-success btn-icon-text"
+                        >
+                            Xóa
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        )
+
     })
     return (
         <div className="card-body">
@@ -25,9 +56,10 @@ function ListStudents() {
                         </tr>
                     </thead>
                     <tbody>
-                        <Students.Provider value={student}>
-                            <Student/>
-                        </Students.Provider>
+                        {/* <Students.Provider value={students}>
+                            <Student />
+                        </Students.Provider> */}
+                        {student}
                     </tbody>
                 </table>
             </div>

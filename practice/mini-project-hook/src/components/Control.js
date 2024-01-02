@@ -1,11 +1,19 @@
-import React from 'react'
-
+import React, {useState, useContext} from 'react'
+import { Toggle } from '../App'
 function Control() {
+    const isToggle = useContext(Toggle)
+    const [toggle, setIsToggle] = useState(isToggle)
+    console.log(toggle);
+    const handleAdd = () => {
+        setIsToggle(true)
+    }
     return (
         <div className="card-header">
             <div className="row">
                 <div className="col-3 ">
-                    <button type="button" className="btn btn-primary btn-icon-text">
+                    <button type="button"
+                        className="btn btn-primary btn-icon-text"
+                        onClick={handleAdd}>
                         Thêm mới sinh viên
                     </button>
                 </div>

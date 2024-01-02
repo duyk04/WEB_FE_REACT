@@ -3,10 +3,12 @@ import { Students } from './ListStudents'
 
 function Student() {
     const student = useContext(Students)
+    // console.log(student);
+
     return (
         <tr>
             <td>1</td>
-            <td>{student[1].studentId}</td>
+            <td>{student.studentId}</td>
             <td>Nguyễn Văn A</td>
             <td>20</td>
             <td>Nam</td>
