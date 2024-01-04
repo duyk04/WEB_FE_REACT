@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Task({ renderTask, renderStt, onEdit }) {
+function Task({ renderTask, renderStt, onEdit, onDelete }) {
 
     //level with style
     let elementLevel = ""
@@ -14,7 +14,15 @@ function Task({ renderTask, renderStt, onEdit }) {
     }
 
     const handleEdit = () => {
-        onEdit(true, "Update",renderTask )
+        onEdit(true, "Update", renderTask)
+        console.log(renderTask);
+
+    }
+    const handleDelete = () => {
+        if (window.confirm("Bạn có muốn xóa không ?") === true) {
+            onDelete("Delete", renderTask)
+        }
+
     }
     return (
         <>
@@ -30,7 +38,7 @@ function Task({ renderTask, renderStt, onEdit }) {
                     <button type="button" className="btn btn-warning" onClick={handleEdit}>
                         Edit
                     </button>
-                    <button type="button" className="btn btn-danger ms-2">
+                    <button type="button" className="btn btn-danger ms-2" onClick={handleDelete}>
                         Delete
                     </button>
                 </td>

@@ -1,9 +1,15 @@
 import React, { useState } from 'react'
 
-function Control({onAdd}) {
+function Control({onAdd, onSearch}) {
     // const [isToggle, setToggle] = useState(onAdd)
     const handleAdd = () =>{ 
         onAdd(true,"Save")
+    }
+
+    const [keyword, setKeyword] = useState(" ")
+
+    const handleSearch = () =>{
+        onSearch(keyword)
     }
 
     return (
@@ -16,9 +22,12 @@ function Control({onAdd}) {
                         className="form-control"
                         // ref="search"
                         placeholder="Search for..."
+                        name='keyword'
+                        value={keyword}
+                        onChange={(e)=>setKeyword(e.target.value)}
                     />
                     <span className="input-group-btn">
-                        <button className="btn btn-info" type="button">
+                        <button className="btn btn-info" type="button" onClick={handleSearch}>
                             Go!
                         </button>
                     </span>

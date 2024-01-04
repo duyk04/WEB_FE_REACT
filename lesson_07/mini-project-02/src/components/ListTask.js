@@ -1,15 +1,18 @@
 import React from 'react'
 import Task from './Task'
 
-function ListTask({renderListTask, onEdit}) {
+function ListTask({ renderListTask, onEdit, onDelete }) {
     // console.log(renderListTask);
-    const handleEdit = (toggle, actionName, task) =>{
+    const handleEdit = (toggle, actionName, task) => {
         onEdit(toggle, actionName, task)
     }
+    const handleDelete = (actionName, task) => {
+        onDelete(actionName, task)
+    }
     // map to Task
-    let elementTask = renderListTask.map((task,index) =>{
+    let elementTask = renderListTask.map((task, index) => {
         return (
-            <Task key={task.taskId} renderTask={task} renderStt={index+1} onEdit={handleEdit}/>
+            <Task key={task.taskId} renderTask={task} renderStt={index + 1} onEdit={handleEdit} onDelete={handleDelete} />
         )
     })
     return (

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 
-function Form({ rederActionName, onCancel, task }) {
-    const listTasks = [
-        { taskName: " ", level: "" },
-    ]
+function Form({ rederActionName, onCancel, task, onEdit, onSubmit }) {
+    // const listTasks = [
+    //     { taskId: 0, taskName: " ", level: " " },
+    // ]
+    const [taskName, setTaskName] = useState(" ")
+    const [level, setLevel] = useState(" ")
 
-    const [listTask, setListTask] = useState(listTasks)
+    // const [listTask, setListTask] = useState(listTasks)
     const handleCancel = () => {
         onCancel(false)
     }
@@ -14,24 +16,52 @@ function Form({ rederActionName, onCancel, task }) {
     // console.log(rederActionName);
     useEffect(() => {
         if (rederActionName === "Update") {
-            setListTask({
-                taskName: task.taskName,
-                level: task.level
-            });
-        } else {
-            setListTask({
-                taskName: " ",
-                level: "Small"
-            });
+            // setListTask({
+            //     taskId: task.taskId,
+            //     taskName: task.taskName,
+            //     level: task.level
+            // });
+            setTaskName(task.taskName)
+            setLevel(task.level)
+        } else if (rederActionName === "Save") {
+            // setListTask({
+            //     taskId: " ",
+            //     taskName: " ",
+            //     level: " "
+            // });
         }
     }, [rederActionName, task]);
 
-    const handleChange = (e) =>{
-        let name = e.target.name;
-        let val = e.target.value;
-        setListTask({
-            [name]:val,
-        })
+    // const handleChange = (e) => {
+    //     // const { name, value } = e.target;
+    //     //     setListTask((prevTask) => ({
+    //     //         ...prevTask,
+    //     //         [name]: value
+    //     //     }));
+    // };
+    const handelSubmit = (e) => {
+        e.preventDefault();
+        // onUpdate(listTask)
+        // console.log(listTask);
+        var tasks
+        if (rederActionName === "Save") {
+            tasks = {
+                taskId: 0,
+                taskName: taskName,
+                level: level
+            }
+        }
+        if (rederActionName === "Update") {
+            tasks = {
+                taskId: task.taskId,
+                taskName: taskName,
+                level: level
+            }
+        }
+
+
+        // console.log(taskName,level);
+        onSubmit(false, rederActionName, tasks)
     }
     return (
         <div className="row">
@@ -45,9 +75,9 @@ function Form({ rederActionName, onCancel, task }) {
                             type="text"
                             className="form-control me-2"
                             placeholder="Task Name"
-                            name='name'
-                            value={listTask.taskName}
-                            onChange={handleChange}
+                            name="taskName"
+                            value={taskName}
+                            onChange={(e) => setTaskName(e.target.value)}
                         // ref="task_name"
                         />
                     </div>
@@ -60,8 +90,8 @@ function Form({ rederActionName, onCancel, task }) {
                             id="inputDs"
                             className="form-control"
                             required="required"
-                            value={listTask.level}
-                            onChange={handleChange}
+                            value={level}
+                            onChange={(e) => setLevel(e.target.value)}
                         // ref="task_level"
                         >
                             Small
@@ -70,7 +100,7 @@ function Form({ rederActionName, onCancel, task }) {
                             <option value={"High"}>High</option>
                         </select>
                     </div>
-                    <button type="button" className="btn btn-primary me-2 ms-5">
+                    <button type="button" className="btn btn-primary me-2 ms-5" onClick={handelSubmit}>
                         {rederActionName}
                     </button>
                     <button type="button" className="btn btn-default" onClick={handleCancel}>
