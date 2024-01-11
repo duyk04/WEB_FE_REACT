@@ -16,21 +16,29 @@ function App() {
 	]
 
 	// luu data trong localStorage
-	useEffect(() => {
-		let data = JSON.parse(localStorage.getItem("Data_Rj"))
-		if (data === null || data === 0) {
-			data = listTasks;
-			localStorage.setItem("Data_Rj", JSON.stringify(data))
-		} else {
-			setListTask(data)
-		}
+	// useEffect(() => {
+	// 	let data = JSON.parse(localStorage.getItem("Data_Rj"))
+	// 	if (data === null || data === 0) {
+	// 		data = listTasks;
+	// 		localStorage.setItem("Data_Rj", JSON.stringify(data))
+	// 	} else {
+	// 		setListTask(data)
+	// 	}
 
-	}, [])
+	// }, [])
+	const [listTask, setListTask] = useState(()=>{
+		const lists = JSON.parse(localStorage.getItem("Data_Rj"));
+		  if(lists === null || lists.length ===0){
+			return listTasks;
+		  }else{
+			return lists;
+		  }
+	  });
 
 
 	// Tạo state
 
-	const [listTask, setListTask] = useState(listTasks)
+	// const [listTask, setListTask] = useState(listTasks)
 
 	const taskNull = {
 		taskId: 0,
@@ -94,19 +102,36 @@ function App() {
 
 	const handleSearch = (keyword) => {
 		setKeyword(keyword)
-		console.log(keyword);
+
 	}
 
-	useEffect(() => {
-		var listSearch = listTasks
-		if (keyword === null || keyword === "" || keyword === undefined) {
+	// useEffect(() => {
+	// 	console.log(keyword);
+	// 	let listSearch = listTasks
 
+	// 	if (keyword === null || keyword === "" || keyword === undefined) {
+
+	// 	}
+	// 	else{
+	// 		listSearch = listTasks.filter(x=>x.taskName.includes(keyword))
+	// 	}setTask(listSearch)
+	// 	console.log(listSearch); 
+	// }, [keyword])
+	useEffect(() => {
+		const lists = JSON.parse(localStorage.getItem("Data_Rj"));
+		if (keyword === undefined || keyword === "" || keyword === null) {
+		  if (lists === null || lists.length === 0)
+			setListTask(listTasks);
+		  else
+			setListTask(lists);
+		} else {
+		  let dataFilter = listTask.filter(x => x.taskName.toLowerCase().includes(keyword.toLowerCase()))
+		  setListTask(dataFilter);
+		  console.log(dataFilter);
 		}
-		else{
-			listSearch = listTasks.filter(x=>x.taskName.includes(keyword))
-		}
-		setTask(listSearch)
-	}, [])
+	  }, [keyword]);
+	  
+
 	//renderForm
 
 	let elementForm = isToggle === true ? <Form rederActionName={actionName} onCancel={handleCancel} task={task} onSubmit={handleSubmit} /> : " ";

@@ -93,7 +93,7 @@ export default class App extends Component {
 				renderStudent={this.state.student}
 				onSubmit={this.handleSubmit} /> : "";
 
-		//xử lý dữ liệu tìm kiếm
+		//xử lý dữ liệu tìm kiếm	
 		let { keyword, students } = this.state;
 		let dataFilter = students;
 		if (keyword !== "") {
