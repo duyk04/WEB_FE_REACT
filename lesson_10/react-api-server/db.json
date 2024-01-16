@@ -1,0 +1,39 @@
+{
+    "users": [
+        {
+            "id": 111,
+            "userName": "Duyk04",
+            "password": "12345"
+        },
+        {
+            "id": 222,
+            "userName": "Duyk03",
+            "password": "12345"
+        },
+        {
+            "id": 333,
+            "userName": "Duyk02",
+            "password": "12345"
+        }
+    ],
+    "student": [
+        {
+            "studentId": "SV001",
+            "studentName": "Nguyen Khuong Duy",
+            "age": "20",
+            "userId": 111
+        },
+        {
+            "studentId": "SV002",
+            "studentName": "Bui Ngoc Bach",
+            "age": "21",
+            "userId": 222
+        },
+        {
+            "studentId": "SV003",
+            "studentName": "Dam Quoc Dan",
+            "age": "23",
+            "userId": 333
+        }
+    ]
+}
