@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from '../api/mock-api'
 import '../App.css'
 import Form from './Form'
-function ListCategories( onView) {
+function ListCategories({ onView }) {
     // tạo state lưu trữ dữ liệu cho componet
     const [listUser, setListUser] = useState([])
     // hàm lấy dữ liệu từ api
@@ -23,10 +23,9 @@ function ListCategories( onView) {
         await axios.delete('users/' + id)
 
     }
-
-    const handleView = (item) =>{
-        // <Form onView={item}/>
-        console.log(item);
+    const [items, setItems] = useState()
+    const handleView = (item) => {
+        setItems(item);
     }
     return (
         <div className='container-fluid' style={{ border: '1px solid red' }}>
@@ -59,7 +58,7 @@ function ListCategories( onView) {
                                             <td>{item.orders}</td>
                                             <td>{item.status === 1 ? <p style={{ color: 'green' }}>Còn hàng</p> : <p style={{ color: 'red' }}>Hết hàng</p>}</td>
                                             <td>
-                                                <button type="button" className="btn btn-primary me-2" onClick={()=>handleView(item)}>
+                                                <button type="button" className="btn btn-primary me-2" onClick={() => handleView(item)}>
                                                     Xem
                                                 </button>
                                                 <button type="button" className="btn btn-success me-2">
@@ -76,9 +75,9 @@ function ListCategories( onView) {
                             }
 
                         </tbody>
-                    </table> 
+                    </table>
                 </div>
-                <Form  />
+               <Form onView={items}/>
             </div>
 
         </div>

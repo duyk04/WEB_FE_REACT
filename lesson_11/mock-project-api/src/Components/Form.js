@@ -11,19 +11,19 @@ function Form({onView}) {
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tên danh mục</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" value={onView.title} />
                             </div>
                         </div>
                         <div class="form-group row my-3">
                             <label class="col-sm-3 col-form-label">Mô tả</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" value={onView.mateTitle.toUpperCase()} />
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Trạng thái</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" value={onView.status === 1 ? <p style={{ color: 'green' }}>Còn hàng</p> : <p style={{ color: 'red' }}>Hết hàng</p>} />
                             </div>
                         </div>
                         {/* <div class="form-group row">
