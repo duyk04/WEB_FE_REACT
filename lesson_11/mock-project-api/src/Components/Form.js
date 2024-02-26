@@ -23,7 +23,7 @@ function Form({onView}) {
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Trạng thái</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" value={onView.status === 1 ? <p style={{ color: 'green' }}>Còn hàng</p> : <p style={{ color: 'red' }}>Hết hàng</p>} />
+                                <input type="text" class="form-control" value={onView.status} />
                             </div>
                         </div>
                         {/* <div class="form-group row">
